@@ -19,12 +19,15 @@ function Market({navigation}) {
     
     const RenderItem =({ item,index }) => {
         return (
-            <View key={index}>
-                <ImageBackground key={index} resizeMode={"contain"} source={{uri:item.urlToImage}} style={{width:width,height:height/3}}/>
-                <Text >{item.title}</Text>
-                <Text>{item.description}</Text>
+            <View key={index} style={{display:"flex",flex:1,flexDirection:"column",justifyContent:"space-between"}}>
+                <View>
+                    <ImageBackground key={index} resizeMode={"stretch"} source={{uri:item.urlToImage}} style={{width:width,height:height/3,display:"flex",flexDirection:"row",alignItems:"flex-end"}}>
+                        <Text style={{backgroundColor:"#000",color:"#FFE401",fontSize:20,fontWeight:"bold",textAlign:"center"}}>{item.title}</Text>
+                    </ImageBackground>
+                    <Text>{item.description}</Text>
+                </View>
                 <TouchableWithoutFeedback onPress={()=>navigation.navigate('Web', { url:item.url })}>
-                    <Text>Habere Git</Text>
+                    <Text style={{marginBottom:height/10,textAlign:"center",margin:10,padding:50,paddingTop:10,paddingBottom:10,backgroundColor:"#2196F3",color:"#fff",fontSize:20,fontWeight:"bold"}}>HABERE GIT</Text>
                 </TouchableWithoutFeedback>
             </View>
         );
