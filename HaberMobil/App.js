@@ -1,22 +1,19 @@
 import React from 'react';
 import { StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Haberler from './src/components/Haberler';
-import Web from './src/components/Web'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HaberDetail from './pages/HaberDetail';
 import 'react-native-gesture-handler';
 
-const Stack = createStackNavigator();
-
+const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <>
       <StatusBar style="auto"/>
       <NavigationContainer >
-        <Stack.Navigator >
-          <Stack.Screen name="Haberler" component={Haberler} options={{headerShown: false}}/>
-          <Stack.Screen name="Web" component={Web} options={{headerShown: false}}/>
-        </Stack.Navigator>
+        <Drawer.Navigator >
+          <Drawer.Screen name="HaberDetail" component={HaberDetail}/>
+        </Drawer.Navigator>
       </NavigationContainer>
     </>
   );
