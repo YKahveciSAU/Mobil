@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SingIn from '../src/components/Login/SingIn'
 import SingUp from '../src/components/Login/SingUp'
