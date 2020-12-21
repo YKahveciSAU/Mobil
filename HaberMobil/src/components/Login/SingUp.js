@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react';
 import {View,Text,Dimensions,TextInput,TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import firebase from 'firebase'
 const Height=Dimensions.get("window").height;
 const Width=Dimensions.get("window").width;
-function SingUp() {
+function SingUp({navigation}) {
     const [userName,setUserName]=useState("")
     const [userPassword,setUserPassword]=useState("")
     const [comfirmPassword,setComfirmPassword]=useState("")
@@ -13,6 +14,15 @@ function SingUp() {
     function Gonder(){
         userName === "" ? setNameField(false) : setNameField(true) ;
         userPassword === "" ? setPassField(false) : setPassField(true);
+
+        if (nameField&&passField&&comfirmPassword) {
+            firebase.auth().createUserWithEmailAndPassword(userName,userPassword)
+            .then(()=>{
+                console.log(userName+" olusturuldu")
+                navigation.navigate("Giris Yap");
+            })
+            .catch(()=>console.log(userName+" olusturulamadi."))
+        }
     }
 
     useEffect(()=>{

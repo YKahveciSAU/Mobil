@@ -1,17 +1,26 @@
 import React,{useState} from 'react';
 import {View,TextInput,Dimensions, Text,TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import firebase from 'firebase'
 const Height=Dimensions.get("window").height;
 const Width=Dimensions.get("window").width;
-function SingIn() {
+function SingIn({navigation}) {
     const [userName,setUserName]=useState("")
     const [userPassword,setUserPassword]=useState("")
     const [nameField,setNameField]=useState(true);
     const [passField,setPassField]=useState(true)
 
+
     function Gonder(){
         userName === "" ? setNameField(false) : setNameField(true) ;
         userPassword === "" ? setPassField(false) : setPassField(true);
+
+        firebase.auth().signInWithEmailAndPassword(userName,userPassword)
+        .then(()=>{
+            console.log("basarili")
+            navigation.navigate("Haberler")
+        })
+        .catch(()=>console.log("error"));
     }
     return (
             <View style={{display:"flex",alignItems:"center",justifyContent:"center",backgroundColor:"#fff",height:Height,flex:1}}>
