@@ -3,6 +3,9 @@ import Search from '../Haber/Search'
 import axios from 'axios'
 import {View,Text,ImageBackground,Dimensions,TouchableWithoutFeedback } from 'react-native'
 import AppIntroSlider from 'react-native-app-intro-slider';
+
+import { sendNotificationToAllUsers} from '../../../utils/RegisterNotifications'
+
 const height=Dimensions.get("window").height;
 const width=Dimensions.get("window").width;
 function Market({navigation}) {
@@ -27,7 +30,7 @@ function Market({navigation}) {
                     <Text style={{margin:15,color:"#000",fontSize:20,fontWeight:"bold",textAlign:"center"}}>{item.title}</Text>
                     <Text style={{margin:10,fontSize:15}}>{String(item.description).substring(0,200)}...</Text>
                 </View>
-                <TouchableWithoutFeedback onPress={()=>navigation.navigate('Web', { url:item.url })}>
+                <TouchableWithoutFeedback onPress={()=>{sendNotificationToAllUsers();navigation.navigate('Web', { url:item.url })}}>
                     <Text style={{marginBottom:height/10,textAlign:"center",margin:10,padding:50,paddingTop:10,paddingBottom:10,backgroundColor:"#2196F3",color:"#fff",fontSize:20,fontWeight:"bold"}}>HABERE GIT</Text>
                 </TouchableWithoutFeedback>
             </View>

@@ -1,7 +1,10 @@
 import React,{useState} from 'react';
 import {View,TextInput,Dimensions, Text,TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+
 import firebase from 'firebase'
+import { registerForPushNotifications} from '../../../utils/RegisterNotifications'
+
 const Height=Dimensions.get("window").height;
 const Width=Dimensions.get("window").width;
 function SingIn({navigation}) {
@@ -17,7 +20,7 @@ function SingIn({navigation}) {
 
         firebase.auth().signInWithEmailAndPassword(userName,userPassword)
         .then(()=>{
-            console.log("basarili")
+            registerForPushNotifications();
             navigation.navigate("Haberler")
         })
         .catch(()=>console.log("error"));
@@ -55,5 +58,7 @@ function SingIn({navigation}) {
             </View>
     )
 }
+
+
 
 export default SingIn
