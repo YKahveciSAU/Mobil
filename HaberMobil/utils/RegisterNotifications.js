@@ -14,18 +14,18 @@ export const registerForPushNotifications = async() =>{
     let token=await Notifications.getExpoPushTokenAsync();
     console.log(token.data)
 
-    let uid = firebase.auth().currentUser.uid;
-    firebase.database().ref("users").child(uid).update({
-        expoPushToken: token.data
-    });
+        let uid = firebase.auth().currentUser.uid;
+        firebase.database().ref("users").child(uid).update({
+            expoPushToken: token.data
+        });
 }
 
-async function sendPushNotification(expoPushToken) {
+async function sendPushNotification(expoPushToken,title,link) {
     const message = {
         to: expoPushToken,
         sound: 'default',
-        title: 'Bildirim',
-        body: 'Oturum Acildi',
+        title: title,
+        body: link,
         data: { data: 'Buraya' },
     };
 
@@ -40,7 +40,7 @@ async function sendPushNotification(expoPushToken) {
     });
 }
 
-export const sendNotificationToAllUsers = async () => {
+export const sendNotificationToAllUsers = async (title,link) => {
     const users = await firebase.database().ref('/users').orderByChild('token');
     users.once("value").then(snapshot => {
         let data;
@@ -48,7 +48,7 @@ export const sendNotificationToAllUsers = async () => {
             let childData = childSub.toJSON();
             data = childData.expoPushToken;
             console.log(data);
-            sendPushNotification(data);
+            sendPushNotification(data,title,link);
         });
 
     })

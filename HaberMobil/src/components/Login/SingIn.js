@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import firebase from 'firebase'
 import { registerForPushNotifications} from '../../../utils/RegisterNotifications'
 
+import {styles} from './css/SingCss'
+
 const Height=Dimensions.get("window").height;
 const Width=Dimensions.get("window").width;
 function SingIn({navigation}) {
@@ -26,12 +28,12 @@ function SingIn({navigation}) {
         .catch(()=>console.log("error"));
     }
     return (
-            <View style={{display:"flex",alignItems:"center",justifyContent:"center",backgroundColor:"#fff",height:Height,flex:1}}>
+            <View style={styles.conteiner}>
                 <View>
-                    <View style={{display:"flex",alignItems:"center",marginBottom:30}}>
+                    <View style={styles.icon}>
                         <Icon name={"user"} size={80}/>
                     </View>
-                    <View style={[{display:"flex",flexDirection:"row",alignItems:"center",margin:3,marginTop:10,padding:10,borderWidth:1,paddingLeft:15,paddingRight:10,backgroundColor:"#eee",borderColor:"#eee",borderRadius:10},nameField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
+                    <View style={[styles.input,nameField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
                         <Icon name={"envelope"} size={24}/>
                         <TextInput
                             placeholder="Kullanici Adi"
@@ -39,7 +41,7 @@ function SingIn({navigation}) {
                             style={{marginLeft:10,width:Width/2,fontSize:18,paddingLeft:5}}
                         />
                     </View>
-                    <View style={[{display:"flex",flexDirection:"row",alignItems:"center",margin:3,marginTop:10,padding:10,borderWidth:1,paddingLeft:15,paddingRight:10,backgroundColor:"#eee",borderColor:"#eee",borderRadius:10},passField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
+                    <View style={[styles.input,passField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
                         <Icon name={"lock"} size={30}/>
                         <TextInput
                             placeholder="Sifre"
@@ -50,11 +52,13 @@ function SingIn({navigation}) {
                     </View>
                 </View>
                 <TouchableOpacity onPress={()=> Gonder()}>
-                    <Text style={{backgroundColor:"#57b847",margin:3,marginTop:10,padding:10,width:Width/2,borderRadius:10,color:"#fff",fontSize:18,textAlign:"center",fontWeight:"bold"}}>
+                    <Text style={styles.login}>
                         Giris Yap
                     </Text>
                 </TouchableOpacity>
-                <Text style={{color:"#aeaeae",marginTop:3}}>Kullanici Adi/Sifre Unuttum</Text>
+                <Text style={styles.forget}>
+                    Kullanici Adi/Sifre Unuttum
+                </Text>
             </View>
     )
 }

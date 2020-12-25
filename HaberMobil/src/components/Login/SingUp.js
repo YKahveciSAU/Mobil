@@ -2,6 +2,9 @@ import React,{useState,useEffect} from 'react';
 import {View,Text,Dimensions,TextInput,TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import firebase from 'firebase'
+
+import {styles} from './css/SingCss'
+
 const Height=Dimensions.get("window").height;
 const Width=Dimensions.get("window").width;
 function SingUp({navigation}) {
@@ -21,7 +24,11 @@ function SingUp({navigation}) {
                 console.log(userName+" olusturuldu")
                 navigation.navigate("Giris Yap");
             })
-            .catch(()=>console.log(userName+" olusturulamadi."))
+            .catch(()=>{
+                console.log(userName+" olusturulamadi.");
+                console.log(userPassword);
+                console.log(comfirmPassword)
+            })
         }
     }
 
@@ -30,12 +37,12 @@ function SingUp({navigation}) {
     },[comfirmPassword])
 
     return (
-            <View style={{display:"flex",alignItems:"center",justifyContent:"center",backgroundColor:"#fff",height:Height,flex:1}}>
+            <View style={styles.conteiner}>
                 <View>
-                    <View style={{display:"flex",alignItems:"center",marginBottom:30}}>
+                    <View style={styles.icon}>
                         <Icon name={"users"} size={80}/>
                     </View>
-                    <View style={[{display:"flex",flexDirection:"row",alignItems:"center",margin:3,marginTop:10,padding:10,borderWidth:1,paddingLeft:15,paddingRight:10,backgroundColor:"#eee",borderColor:"#eee",borderRadius:10},nameField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
+                    <View style={[styles.input,nameField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
                         <Icon name={"envelope"} size={24}/>
                         <TextInput
                             placeholder="Kullanici Adi"
@@ -43,7 +50,7 @@ function SingUp({navigation}) {
                             style={{marginLeft:10,width:Width/2,fontSize:18,paddingLeft:5}}
                         />
                     </View>
-                    <View style={[{display:"flex",flexDirection:"row",alignItems:"center",margin:3,marginTop:10,padding:10,borderWidth:1,paddingLeft:15,paddingRight:10,backgroundColor:"#eee",borderColor:"#eee",borderRadius:10},passField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
+                    <View style={[styles.input,passField ? {borderColor:"#eee"}: {borderColor:"#f00"}]}>
                         <Icon name={"lock"} size={30}/>
                         <TextInput
                             placeholder="Sifre"
@@ -52,7 +59,7 @@ function SingUp({navigation}) {
                             style={{marginLeft:10,width:Width/2,fontSize:18,paddingLeft:5}}
                         />
                     </View>
-                    <View style={[{display:"flex",flexDirection:"row",alignItems:"center",margin:3,marginTop:10,padding:10,borderWidth:1,paddingLeft:15,paddingRight:10,backgroundColor:"#eee",borderColor:"#eee",borderRadius:10},{borderColor:backColor}]}>
+                    <View style={[styles.input,{borderColor:backColor}]}>
                         <Icon name={"unlock"} size={30}/>
                         <TextInput
                             placeholder="Sifre Dogrula"
@@ -63,7 +70,7 @@ function SingUp({navigation}) {
                     </View>
                 </View>
                 <TouchableOpacity onPress={()=> Gonder()}>
-                    <Text style={{backgroundColor:"#57b847",margin:3,marginTop:10,padding:10,width:Width/2,borderRadius:10,color:"#fff",fontSize:18,textAlign:"center",fontWeight:"bold"}}>
+                    <Text style={styles.login}>
                         Kayit Ol
                     </Text>
                 </TouchableOpacity>
