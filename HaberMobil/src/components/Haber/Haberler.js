@@ -52,7 +52,6 @@ function Market({navigation}) {
                         </Text>
                     </TouchableWithoutFeedback>
                 </View>
-
             </View>
         );
       }

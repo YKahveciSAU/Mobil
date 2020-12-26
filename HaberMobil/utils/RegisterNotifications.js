@@ -14,10 +14,10 @@ export const registerForPushNotifications = async() =>{
     let token=await Notifications.getExpoPushTokenAsync();
     console.log(token.data)
 
-        let uid = firebase.auth().currentUser.uid;
-        firebase.database().ref("users").child(uid).update({
-            expoPushToken: token.data
-        });
+    let uid = firebase.auth().currentUser.uid;
+    firebase.database().ref("users").child(uid).update({
+        expoPushToken: token.data
+    });
 }
 
 async function sendPushNotification(expoPushToken,title,link) {

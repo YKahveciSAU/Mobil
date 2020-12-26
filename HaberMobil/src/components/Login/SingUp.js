@@ -14,6 +14,8 @@ function SingUp({navigation}) {
     const [nameField,setNameField]=useState(true);
     const [passField,setPassField]=useState(true)
     const [backColor,setBackColor]=useState("#eee")
+
+    
     function Gonder(){
         userName === "" ? setNameField(false) : setNameField(true) ;
         userPassword === "" ? setPassField(false) : setPassField(true);
@@ -22,6 +24,7 @@ function SingUp({navigation}) {
             firebase.auth().createUserWithEmailAndPassword(userName,userPassword)
             .then(()=>{
                 console.log(userName+" olusturuldu")
+                firebase.auth().signOut();
                 navigation.navigate("Giris Yap");
             })
             .catch(()=>{
